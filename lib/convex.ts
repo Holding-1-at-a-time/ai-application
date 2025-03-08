@@ -1,0 +1,10 @@
+import { ConvexReactClient } from "convex/react"
+
+// Create the Convex client
+const convexUrl = process.env.NEXT_PUBLIC_CONVEX_URL!
+if (!convexUrl) {
+    throw new Error("NEXT_PUBLIC_CONVEX_URL is not set")
+}
+
+export const convex = new ConvexReactClient(convexUrl)
+
