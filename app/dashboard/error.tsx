@@ -4,13 +4,16 @@ import { useEffect } from 'react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
 import { AlertCircle, RefreshCw, Home, ArrowLeft } from 'lucide-react'
+import { useRouter } from 'next/router'
 
 interface ErrorProps {
     error: Error & { digest?: string }
     reset: () => void
 }
 
+
 export default function DashboardError({ error, reset }: ErrorProps) {
+    const router = useRouter()
     useEffect(() => {
         // Log the error to an error reporting service
         console.error('Dashboard error:', error)
@@ -50,11 +53,11 @@ export default function DashboardError({ error, reset }: ErrorProps) {
                 </CardContent>
                 <CardFooter className="flex justify-between">
                     <div className="flex space-x-2">
-                        <Button variant="outline" size="sm" onClick={() => window.history.back()}>
+                        <Button variant="outline" size="sm" onClick={() => router.back()}>
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Go Back
                         </Button>
-                        <Button variant="outline" size="sm" onClick={() => window.location.href = '/'}>
+                        <Button variant="outline" size="sm" onClick={() => router.push('/')}>
                             <Home className="mr-2 h-4 w-4" />
                             Home
                         </Button>

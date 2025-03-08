@@ -104,7 +104,7 @@ export function AIInsights({ organizationId }: AIInsightsProps) {
                 <CardContent className="p-6 text-center">
                     <AlertTriangle className="h-10 w-10 text-yellow-500 mx-auto mb-4" />
                     <p className="mb-4">{error}</p>
-                    <Button onClick={() => generateInsights({ organizationId })}>Try Again</Button>
+                    <Button onClick={() => { setLoading(true); generateInsights({ organizationId }); }}>Try Again</Button>
                 </CardContent>
             </Card>
         )

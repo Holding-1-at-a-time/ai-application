@@ -41,10 +41,15 @@ export async function POST(req: NextRequest) {
         const currentDate = new Date()
         const currentMonth = currentDate.getMonth()
         let currentSeason = "spring"
-        if (currentMonth >= 2 && currentMonth <= 4) currentSeason = "spring"
-        else if (currentMonth >= 5 && currentMonth <= 7) currentSeason = "summer"
-        else if (currentMonth >= 8 && currentMonth <= 10) currentSeason = "fall"
-        else currentSeason = "winter"
+        if (currentMonth >= 2 && currentMonth <= 4) {
+          currentSeason = "spring"
+        } else if (currentMonth >= 5 && currentMonth <= 7) {
+                 currentSeason = "summer"
+               } else if (currentMonth >= 8 && currentMonth <= 10) {
+                        currentSeason = "fall"
+                      } else {
+                        currentSeason = "winter"
+                      }
 
         // Generate pricing recommendations
         const { object } = await generateObject({

@@ -72,7 +72,8 @@ export function RevenueMetrics({ data }: RevenueMetricsProps) {
                                 }}
                             />
                             <Legend />
-                            <Bar dataKey="revenue" name="Current Revenue" fill="hsl(var(--primary))" />
+                            +<Bar dataKey="revenue" name="Current Revenue" fill="var(--color-primary)" />
+
                             <Bar dataKey="previousRevenue" name="Previous Period" fill="hsl(var(--muted))" />
                         </BarChart>
                     </ResponsiveContainer>

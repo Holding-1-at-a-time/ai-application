@@ -67,8 +67,18 @@ export function InventoryStatus({ data }: InventoryStatusProps) {
         const statusA = getInventoryStatus(a.currentLevel, a.minLevel, a.optimalLevel)
         const statusB = getInventoryStatus(b.currentLevel, b.minLevel, b.optimalLevel)
 
-        if (statusA === "low" && statusB !== "low") return -1
-        if (statusA !== "low" && statusB === "low") return 1
+        if (statusA === "low" && statusB !== "low") {
+          return -1
+        }
+        if (statusA !== "low" && statusB === "low") {
+          return 1
+        }
+        if (a.currentLevel < b.currentLevel) {
+          return -1
+        }
+        if (a.currentLevel > b.currentLevel) {
+          return 1
+        }
         return 0
     })
 
