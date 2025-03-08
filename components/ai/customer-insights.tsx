@@ -12,6 +12,12 @@ import { BarChart, PieChart, Users, TrendingUp, RefreshCw, Lightbulb } from "luc
 
 interface CustomerInsightsProps {
     organizationId: string
+},
+interface KeyMetric {
+    name: string;
+    change: number;
+    value: string; // Or number, depending on your data
+    description: string;
 }
 
 export default function CustomerInsights({ organizationId }: CustomerInsightsProps) {
@@ -22,15 +28,26 @@ export default function CustomerInsights({ organizationId }: CustomerInsightsPro
 
     // Get appointment data
     const appointmentData = useQuery(api.appointments.getAppointmentsForAnalysis, { organizationId })
-
-    // Use AI to generate insights
-    const { object, submit, isLoading, error } = useObject({
+    const [, setError] = useState<string | null>(null)
+    const { object, submit, isLoading } = useObject({
         api: "/api/ai/customer-insights",
         initialObject: null,
         body: {
             organizationId,
             customerData,
             appointmentData,
+        },
+        onSuccess: (results: unknown) => {
+            console.log(`Customer Insights: ${JSON.stringify(results)}`)
+        },
+        onError: (error) => {
+            if (error && error.message) {
+                setError(error.message)
+                console.error("Customer Insights:", error)
+            } else {
+                setError("An unknown error occurred.")
+                console.error("Customer Insights: An unknown error occurred.", error)
+            }
         },
     })
 
@@ -203,4 +220,3 @@ export default function CustomerInsights({ organizationId }: CustomerInsightsPro
         </Card>
     )
 }
-
